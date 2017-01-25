@@ -1,0 +1,43 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){	
+$("#img").click(function(){ 
+	alert("loading image");
+	toDataUrl();
+
+});
+});
+function toDataUrl(){
+    var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.src = $("#img").attr("src");
+    img.onload = function(){
+    	 
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var dataURL;
+        canvas.height = this.height;
+        canvas.width = this.width;
+        ctx.drawImage(this,0 ,0);
+
+        dataURL = canvas.toDataURL('image/png');
+        console.log(dataURL);
+        $("#img1").attr('src',dataURL);
+        document.getElementById('base64').innerHTML='Image in base64 format';
+        canvas = null; 
+    };
+   }
+
+</script>
+</script>
+</head>
+<body>
+<h2>Image to be converted in base64</h2>
+<img id ="img" src="3.png" width="300px" height="100px"></img>
+<h2 id='base64'></h2>
+<img id="img1" src="" ></img>
+
+</body>
+</html>
